@@ -1,0 +1,27 @@
+{
+  "name": "taxi-license-platform",
+  "version": "1.0.0",
+  "description": "منصة ترخيص التاكسي الجماعي - ولاية منوبة",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["taxi", "license", "tunisia", "manouba"],
+  "author": "Platform Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "multer": "^1.4.5-lts.1",
+    "jszip": "^3.10.1",
+    "cors": "^2.8.5",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "path": "^0.12.7",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

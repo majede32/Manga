@@ -407,6 +407,33 @@ app.get('/api/admin/applications', (req, res) => {
     }
 });
 
+// الحصول على جميع المستخدمين (للإدارة)
+app.get('/api/admin/users', (req, res) => {
+    try {
+        const db = readDatabase();
+        
+        // إرجاع المستخدمين بدون كلمات المرور
+        const usersWithoutPasswords = db.users.map(user => ({
+            id: user.id,
+            idNumber: user.idNumber,
+            email: user.email,
+            phone: user.phone,
+            createdAt: user.createdAt,
+            applications: user.applications
+        }));
+        
+        // ترتيب حسب تاريخ التسجيل (الأحدث أولاً)
+        const sortedUsers = usersWithoutPasswords.sort((a, b) => 
+            new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        
+        res.status(200).json(sortedUsers);
+    } catch (error) {
+        console.error('خطأ في استرجاع المستخدمين:', error);
+        res.status(500).json({ message: 'خطأ في الخادم' });
+    }
+});
+
 // إحصائيات النظام
 app.get('/api/stats', (req, res) => {
     try {

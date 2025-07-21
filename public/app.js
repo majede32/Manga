@@ -109,6 +109,9 @@ async function handleLogin(event) {
             currentUser = response.data.user;
             showAlert('loginAlert', 'تم تسجيل الدخول بنجاح!', 'success');
             
+            // إظهار إشعار ترحيب
+            notifications.showWelcome(currentUser.idNumber);
+            
             // تحديث بيانات النموذج
             document.getElementById('appId').value = currentUser.idNumber;
             
@@ -157,6 +160,9 @@ async function handleRegister(event) {
         });
         
         showAlert('registerAlert', 'تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول', 'success');
+        
+        // إظهار إشعار نجاح التسجيل
+        notifications.showSuccess('تم إنشاء حسابك بنجاح! يمكنك الآن تسجيل الدخول');
         
         // مسح النموذج
         document.getElementById('registerForm').reset();
@@ -258,6 +264,9 @@ async function handleApplicationSubmit(event) {
                 `تم تقديم الطلب بنجاح! رقم التتبع الخاص بك هو: ${response.data.trackId}`, 
                 'success'
             );
+            
+            // إظهار إشعار تقديم الطلب
+            notifications.showApplicationSubmitted(response.data.trackId);
             
             // مسح النموذج
             document.getElementById('applicationForm').reset();

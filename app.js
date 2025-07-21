@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const multer = require('multer');
 const JSZip = require('jszip');
 const fs = require('fs');
@@ -51,39 +50,137 @@ const upload = multer({
     }
 });
 
-// الاتصال بقاعدة البيانات MongoDB
-mongoose.connect('mongodb://localhost:27017/licenseDB', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
-})
-.then(() => console.log('تم الاتصال بقاعدة البيانات'))
-.catch(err => console.error('خطأ في الاتصال بقاعدة البيانات:', err));
+// إعداد قاعدة البيانات المحلية (JSON)
+const DB_FILE = './database.json';
 
-// نموذج المستخدم
-const userSchema = new mongoose.Schema({
-    idNumber: { type: String, unique: true, required: true },
-    email: { type: String, required: true },
-    phone: { type: String, required: true },
-    password: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },
-    applications: [{
-        trackId: { type: String, unique: true },
-        name: String,
-        address: String,
-        status: { type: String, default: 'تحت المراجعة' },
-        submissionDate: { type: Date, default: Date.now },
-        documents: {
-            idCard: String,
-            drivingLicense: String,
-            workCertificate: String,
-            firstAid: String,
-            income: String
-        },
-        notes: String
-    }]
-});
+// إنشاء ملف قاعدة البيانات إذا لم يكن موجوداً
+function initDatabase() {
+    if (!fs.existsSync(DB_FILE)) {
+        const initialData = {
+            users: [],
+            applications: []
+        };
+        fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2));
+    }
+}
 
-const User = mongoose.model('User', userSchema);
+// قراءة البيانات من الملف
+function readDatabase() {
+    try {
+        const data = fs.readFileSync(DB_FILE, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('خطأ في قراءة قاعدة البيانات:', error);
+        return { users: [], applications: [] };
+    }
+}
+
+// كتابة البيانات إلى الملف
+function writeDatabase(data) {
+    try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+        return true;
+    } catch (error) {
+        console.error('خطأ في كتابة قاعدة البيانات:', error);
+        return false;
+    }
+}
+
+// البحث عن مستخدم
+function findUser(idNumber) {
+    const db = readDatabase();
+    return db.users.find(user => user.idNumber === idNumber);
+}
+
+// إضافة مستخدم جديد
+function addUser(userData) {
+    const db = readDatabase();
+    
+    // التحقق من وجود المستخدم
+    if (db.users.find(user => user.idNumber === userData.idNumber)) {
+        return { success: false, message: 'المستخدم موجود بالفعل' };
+    }
+    
+    const newUser = {
+        id: Date.now().toString(),
+        ...userData,
+        createdAt: new Date().toISOString(),
+        applications: []
+    };
+    
+    db.users.push(newUser);
+    
+    if (writeDatabase(db)) {
+        return { success: true, user: newUser };
+    } else {
+        return { success: false, message: 'خطأ في حفظ البيانات' };
+    }
+}
+
+// إضافة طلب لمستخدم
+function addApplication(idNumber, applicationData) {
+    const db = readDatabase();
+    const userIndex = db.users.findIndex(user => user.idNumber === idNumber);
+    
+    if (userIndex === -1) {
+        return { success: false, message: 'المستخدم غير موجود' };
+    }
+    
+    const newApplication = {
+        id: Date.now().toString(),
+        trackId: applicationData.trackId,
+        ...applicationData,
+        submissionDate: new Date().toISOString(),
+        status: 'تحت المراجعة'
+    };
+    
+    db.users[userIndex].applications.push(newApplication);
+    db.applications.push({
+        ...newApplication,
+        userIdNumber: idNumber
+    });
+    
+    if (writeDatabase(db)) {
+        return { success: true, application: newApplication };
+    } else {
+        return { success: false, message: 'خطأ في حفظ الطلب' };
+    }
+}
+
+// البحث عن طلب بواسطة رقم التتبع
+function findApplication(trackId) {
+    const db = readDatabase();
+    return db.applications.find(app => app.trackId === trackId);
+}
+
+// تحديث حالة طلب
+function updateApplicationStatus(trackId, status, notes) {
+    const db = readDatabase();
+    
+    // تحديث في قائمة التطبيقات العامة
+    const appIndex = db.applications.findIndex(app => app.trackId === trackId);
+    if (appIndex !== -1) {
+        db.applications[appIndex].status = status;
+        db.applications[appIndex].notes = notes;
+        db.applications[appIndex].updatedAt = new Date().toISOString();
+    }
+    
+    // تحديث في ملف المستخدم
+    for (let user of db.users) {
+        const userAppIndex = user.applications.findIndex(app => app.trackId === trackId);
+        if (userAppIndex !== -1) {
+            user.applications[userAppIndex].status = status;
+            user.applications[userAppIndex].notes = notes;
+            user.applications[userAppIndex].updatedAt = new Date().toISOString();
+            break;
+        }
+    }
+    
+    return writeDatabase(db);
+}
+
+// تهيئة قاعدة البيانات
+initDatabase();
 
 // إنشاء مجلد الأرشيف إذا لم يكن موجوداً
 if (!fs.existsSync('./archives/')) {
@@ -100,24 +197,21 @@ app.post('/api/register', async (req, res) => {
     try {
         const { idNumber, email, phone, password } = req.body;
         
-        // التحقق من وجود المستخدم
-        const existingUser = await User.findOne({ idNumber });
-        if (existingUser) {
-            return res.status(400).json({ message: 'المستخدم موجود بالفعل' });
-        }
-        
         // تشفير كلمة المرور
         const hashedPassword = await bcrypt.hash(password, 10);
         
-        const newUser = new User({ 
-            idNumber, 
-            email, 
-            phone, 
-            password: hashedPassword 
+        const result = addUser({
+            idNumber,
+            email,
+            phone,
+            password: hashedPassword
         });
         
-        await newUser.save();
-        res.status(201).json({ message: 'تم التسجيل بنجاح' });
+        if (result.success) {
+            res.status(201).json({ message: 'تم التسجيل بنجاح' });
+        } else {
+            res.status(400).json({ message: result.message });
+        }
     } catch (error) {
         console.error('خطأ في التسجيل:', error);
         res.status(500).json({ message: 'خطأ في الخادم' });
@@ -129,7 +223,7 @@ app.post('/api/login', async (req, res) => {
     try {
         const { idNumber, password } = req.body;
         
-        const user = await User.findOne({ idNumber });
+        const user = findUser(idNumber);
         if (!user) {
             return res.status(401).json({ message: 'بيانات الدخول غير صحيحة' });
         }
@@ -185,25 +279,16 @@ app.post('/api/apply', upload.fields([
             income: req.files['income'][0].path
         };
         
-        // البحث عن المستخدم وإضافة الطلب
-        const user = await User.findOneAndUpdate(
-            { idNumber },
-            { 
-                $push: { 
-                    applications: { 
-                        trackId,
-                        name,
-                        address,
-                        documents,
-                        submissionDate: new Date()
-                    } 
-                } 
-            },
-            { new: true, upsert: false }
-        );
+        // إضافة الطلب إلى قاعدة البيانات
+        const result = addApplication(idNumber, {
+            trackId,
+            name,
+            address,
+            documents
+        });
         
-        if (!user) {
-            return res.status(404).json({ message: 'المستخدم غير موجود. يرجى التسجيل أولاً' });
+        if (!result.success) {
+            return res.status(404).json({ message: result.message });
         }
         
         // إنشاء ملف ZIP يحتوي على جميع الوثائق
@@ -265,16 +350,14 @@ app.post('/api/apply', upload.fields([
 });
 
 // تتبع الطلب
-app.get('/api/track/:trackId', async (req, res) => {
+app.get('/api/track/:trackId', (req, res) => {
     try {
         const { trackId } = req.params;
         
-        const user = await User.findOne({ 'applications.trackId': trackId });
-        if (!user) {
+        const application = findApplication(trackId);
+        if (!application) {
             return res.status(404).json({ message: 'رقم التتبع غير صحيح' });
         }
-        
-        const application = user.applications.find(app => app.trackId === trackId);
         
         res.status(200).json({ 
             trackId,
@@ -290,26 +373,17 @@ app.get('/api/track/:trackId', async (req, res) => {
 });
 
 // تحديث حالة الطلب (للإدارة)
-app.put('/api/admin/update-status', async (req, res) => {
+app.put('/api/admin/update-status', (req, res) => {
     try {
         const { trackId, status, notes } = req.body;
         
-        const user = await User.findOneAndUpdate(
-            { 'applications.trackId': trackId },
-            { 
-                $set: { 
-                    'applications.$.status': status,
-                    'applications.$.notes': notes 
-                }
-            },
-            { new: true }
-        );
+        const success = updateApplicationStatus(trackId, status, notes);
         
-        if (!user) {
-            return res.status(404).json({ message: 'الطلب غير موجود' });
+        if (success) {
+            res.status(200).json({ message: 'تم تحديث الحالة بنجاح' });
+        } else {
+            res.status(500).json({ message: 'خطأ في تحديث الحالة' });
         }
-        
-        res.status(200).json({ message: 'تم تحديث الحالة بنجاح' });
     } catch (error) {
         console.error('خطأ في تحديث الحالة:', error);
         res.status(500).json({ message: 'خطأ في الخادم' });
@@ -317,29 +391,38 @@ app.put('/api/admin/update-status', async (req, res) => {
 });
 
 // الحصول على جميع الطلبات (للإدارة)
-app.get('/api/admin/applications', async (req, res) => {
+app.get('/api/admin/applications', (req, res) => {
     try {
-        const users = await User.find({}, 'applications');
-        const allApplications = [];
-        
-        users.forEach(user => {
-            user.applications.forEach(app => {
-                allApplications.push({
-                    trackId: app.trackId,
-                    name: app.name,
-                    status: app.status,
-                    submissionDate: app.submissionDate,
-                    userIdNumber: user.idNumber
-                });
-            });
-        });
+        const db = readDatabase();
         
         // ترتيب حسب تاريخ التقديم (الأحدث أولاً)
-        allApplications.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
+        const sortedApplications = db.applications.sort((a, b) => 
+            new Date(b.submissionDate) - new Date(a.submissionDate)
+        );
         
-        res.status(200).json(allApplications);
+        res.status(200).json(sortedApplications);
     } catch (error) {
         console.error('خطأ في استرجاع الطلبات:', error);
+        res.status(500).json({ message: 'خطأ في الخادم' });
+    }
+});
+
+// إحصائيات النظام
+app.get('/api/stats', (req, res) => {
+    try {
+        const db = readDatabase();
+        
+        const stats = {
+            totalUsers: db.users.length,
+            totalApplications: db.applications.length,
+            pendingApplications: db.applications.filter(app => app.status === 'تحت المراجعة').length,
+            approvedApplications: db.applications.filter(app => app.status === 'مقبول' || app.status === 'موافق عليه').length,
+            rejectedApplications: db.applications.filter(app => app.status === 'مرفوض').length
+        };
+        
+        res.status(200).json(stats);
+    } catch (error) {
+        console.error('خطأ في استرجاع الإحصائيات:', error);
         res.status(500).json({ message: 'خطأ في الخادم' });
     }
 });
@@ -358,6 +441,7 @@ app.use((error, req, res, next) => {
 app.listen(port, () => {
     console.log(`الخادم يعمل على البورت ${port}`);
     console.log(`يمكنك زيارة الموقع على: http://localhost:${port}`);
+    console.log('تم استبدال MongoDB بنظام ملفات JSON محلي');
 });
 
 module.exports = app;

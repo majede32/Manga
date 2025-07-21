@@ -7,25 +7,11 @@ echo "🚀 بدء تشغيل منصة ترخيصي..."
 # إنشاء المجلدات المطلوبة
 echo "📁 إنشاء المجلدات المطلوبة..."
 mkdir -p uploads archives
-sudo mkdir -p /data/db
-sudo chown -R mongodb:mongodb /data/db 2>/dev/null || echo "تحذير: لا يمكن تعيين صلاحيات MongoDB"
 
-# التحقق من وجود MongoDB
-if ! command -v mongod &> /dev/null; then
-    echo "❌ خطأ: MongoDB غير مثبت"
-    echo "يرجى تثبيت MongoDB أولاً باستخدام:"
-    echo "sudo apt-get update && sudo apt-get install -y mongodb-org"
-    exit 1
-fi
-
-# تشغيل MongoDB في الخلفية
-echo "🍃 تشغيل MongoDB..."
-if ! pgrep mongod > /dev/null; then
-    mongod --dbpath /data/db --quiet &
-    sleep 3
-    echo "✅ تم تشغيل MongoDB"
-else
-    echo "✅ MongoDB يعمل بالفعل"
+# إنشاء ملف قاعدة البيانات المحلية إذا لم يكن موجوداً
+if [ ! -f "database.json" ]; then
+    echo "📄 إنشاء ملف قاعدة البيانات المحلية..."
+    echo '{"users":[],"applications":[]}' > database.json
 fi
 
 # تثبيت المتطلبات إذا لم تكن مثبتة
@@ -37,6 +23,7 @@ fi
 # تشغيل التطبيق
 echo "🌐 تشغيل خادم التطبيق..."
 echo "📍 الموقع: http://localhost:3000"
+echo "💾 قاعدة البيانات: JSON محلي"
 echo "⏹️  للإيقاف اضغط Ctrl+C"
 echo "----------------------------------------"
 

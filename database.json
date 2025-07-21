@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "1753130745331",
+      "idNumber": "87654321",
+      "email": "newuser@example.com",
+      "phone": "+21612345679",
+      "password": "$2b$10$NbDhxZNuEzcHaEGsy0zhAeI5Y037Xxje7SdMw05X8hbn5XR06V53K",
+      "createdAt": "2025-07-21T20:45:45.331Z",
+      "applications": []
+    }
+  ],
+  "applications": []
+}

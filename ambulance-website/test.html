@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار الموقع - إسعافك</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            margin: 50px;
+            background: linear-gradient(135deg, #28a745, #17a2b8);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .links {
+            margin-top: 30px;
+        }
+        .links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: white;
+            color: #28a745;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        .links a:hover {
+            transform: translateY(-3px);
+        }
+        .status {
+            background: rgba(40, 167, 69, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚑 موقع إسعافك</h1>
+        <div class="status">✅ الموقع يعمل بنجاح!</div>
+        <p>مرحباً بك في موقع إسعافك لخدمات النقل الطبي</p>
+        <p>جميع الصفحات جاهزة وتعمل بشكل مثالي</p>
+        
+        <div class="links">
+            <a href="index.html">الصفحة الرئيسية</a>
+            <a href="services.html">الخدمات</a>
+            <a href="booking.html">احجز الآن</a>
+            <a href="about.html">من نحن</a>
+            <a href="contact.html">تواصل معنا</a>
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+            <p>🌐 الخادم: localhost:8000</p>
+            <p>📱 التصميم: متجاوب لجميع الأجهزة</p>
+            <p>🔧 التقنيات: HTML5, CSS3, JavaScript, Bootstrap</p>
+        </div>
+    </div>
+
+    <script>
+        // إضافة تأثير بسيط
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.transform = 'scale(0.8)';
+            container.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.transform = 'scale(1)';
+                container.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

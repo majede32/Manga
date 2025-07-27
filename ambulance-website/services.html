@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="خدمات النقل الطبي - نقل طارئ، غير طارئ، جوي، عناية مركزة - إسعافك">
+  <title>خدماتنا - إسعافك</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- شريط الاتصال السريع -->
+  <div class="top-bar bg-danger text-white py-2">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <i class="fas fa-phone"></i> طوارئ: 997 | خدمة العملاء: 920006232
+        </div>
+        <div class="col-md-6 text-end">
+          <button class="btn btn-sm btn-outline-light" onclick="toggleLanguage()">English</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- القائمة الرئيسية -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-danger" href="index.html">
+        <i class="fas fa-ambulance me-2"></i>إسعافك
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">الرئيسية</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="services.html">الخدمات</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="booking.html">احجز الآن</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">من نحن</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">تواصل معنا</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- عنوان الصفحة -->
+  <section class="page-header bg-gradient py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center text-white">
+          <h1 class="display-5 fw-bold mb-3">خدماتنا الطبية</h1>
+          <p class="lead">نقدم خدمات النقل الطبي الشاملة بأعلى معايير الجودة والأمان</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الخدمات الرئيسية -->
+  <section class="services-main py-5">
+    <div class="container">
+      <!-- نقل طارئ -->
+      <div id="emergency" class="service-section mb-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="service-content">
+              <h2 class="text-danger fw-bold mb-4">
+                <i class="fas fa-heartbeat me-3"></i>خدمة النقل الطارئ
+              </h2>
+              <p class="lead mb-4">استجابة فورية للحالات الطبية الطارئة مع فريق طبي مدرب وأجهزة إنعاش متطورة</p>
+              
+              <div class="features-list">
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>استجابة خلال 15 دقيقة</h5>
+                    <p>وصول سريع للموقع مع فريق طبي كامل</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>أجهزة إنعاش متطورة</h5>
+                    <p>جهاز صدمات، جهاز تنفس، أكسجين، أدوية طوارئ</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>فريق طبي مؤهل</h5>
+                    <p>طبيب وممرض معتمدين في الطب الطارئ</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>تنسيق مع المستشفيات</h5>
+                    <p>تجهيز المستشفى مسبقاً لاستقبال الحالة</p>
+                  </div>
+                </div>
+              </div>
+              
+              <a href="booking.html" class="btn btn-danger btn-lg me-3">
+                <i class="fas fa-phone me-2"></i>اطلب الآن
+              </a>
+              <span class="text-muted">متوفر 24/7</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="service-image text-center">
+              <i class="fas fa-ambulance service-large-icon text-danger"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <!-- نقل غير طارئ -->
+      <div id="non-emergency" class="service-section mb-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="service-content">
+              <h2 class="text-primary fw-bold mb-4">
+                <i class="fas fa-wheelchair me-3"></i>خدمة النقل غير الطارئ
+              </h2>
+              <p class="lead mb-4">نقل آمن ومريح للمواعيد الطبية، العلاج الطبيعي، وجلسات الغسيل الكلوي</p>
+              
+              <div class="features-list">
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>مواعيد مجدولة</h5>
+                    <p>حجز مسبق بمواعيد محددة حسب احتياجك</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>راحة تامة</h5>
+                    <p>سيارات مكيفة مع مقاعد طبية مريحة</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>مرافقة طبية</h5>
+                    <p>ممرض مدرب لمراقبة الحالة أثناء النقل</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>خدمة المرافقين</h5>
+                    <p>مساحة لمرافق واحد أو اثنين حسب السيارة</p>
+                  </div>
+                </div>
+              </div>
+              
+              <a href="booking.html" class="btn btn-primary btn-lg me-3">
+                <i class="fas fa-calendar-plus me-2"></i>احجز موعد
+              </a>
+              <span class="text-muted">يفضل الحجز المسبق</span>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="service-image text-center">
+              <i class="fas fa-hospital-user service-large-icon text-primary"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <!-- عناية مركزة -->
+      <div id="icu" class="service-section mb-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="service-content">
+              <h2 class="text-success fw-bold mb-4">
+                <i class="fas fa-procedures me-3"></i>نقل العناية المركزة
+              </h2>
+              <p class="lead mb-4">نقل الحالات الحرجة مع أجهزة العناية المركزة المتنقلة وفريق طبي متخصص</p>
+              
+              <div class="features-list">
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>أجهزة عناية مركزة</h5>
+                    <p>جهاز تنفس، مراقب حيوي، مضخة حقن</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>طبيب متخصص</h5>
+                    <p>طبيب عناية مركزة مع الفريق</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>تنسيق طبي</h5>
+                    <p>تنسيق مع المستشفى المرسل والمستقبل</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>مراقبة مستمرة</h5>
+                    <p>مراقبة العلامات الحيوية طوال الرحلة</p>
+                  </div>
+                </div>
+              </div>
+              
+              <a href="booking.html" class="btn btn-success btn-lg me-3">
+                <i class="fas fa-heartbeat me-2"></i>اطلب الخدمة
+              </a>
+              <span class="text-muted">للحالات الحرجة</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="service-image text-center">
+              <i class="fas fa-user-md service-large-icon text-success"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <!-- نقل جوي -->
+      <div id="air-transport" class="service-section mb-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="service-content">
+              <h2 class="text-warning fw-bold mb-4">
+                <i class="fas fa-helicopter me-3"></i>خدمة النقل الجوي
+              </h2>
+              <p class="lead mb-4">نقل طبي سريع بين المدن والدول مع طائرة إسعاف مجهزة طبياً</p>
+              
+              <div class="features-list">
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>طائرة مجهزة طبياً</h5>
+                    <p>أجهزة طبية متكاملة داخل الطائرة</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>نقل دولي</h5>
+                    <p>خدمة النقل بين الدول مع التراخيص المطلوبة</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>فريق طيران طبي</h5>
+                    <p>طبيب وممرض مدربين على الطيران الطبي</p>
+                  </div>
+                </div>
+                <div class="feature-item d-flex align-items-start mb-3">
+                  <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                  <div>
+                    <h5>تنسيق متكامل</h5>
+                    <p>خدمة متكاملة من المطار إلى المستشفى</p>
+                  </div>
+                </div>
+              </div>
+              
+              <a href="booking.html" class="btn btn-warning btn-lg me-3">
+                <i class="fas fa-plane me-2"></i>استفسر الآن
+              </a>
+              <span class="text-muted">حسب التوفر</span>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="service-image text-center">
+              <i class="fas fa-helicopter service-large-icon text-warning"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- خدمات إضافية -->
+  <section class="additional-services py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5">خدمات إضافية</h2>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="additional-service-card bg-white p-4 rounded shadow-sm h-100 text-center">
+            <i class="fas fa-clinic-medical text-info mb-3"></i>
+            <h5>جلسات الغسيل الكلوي</h5>
+            <p>نقل منتظم لجلسات الغسيل الكلوي مع مواعيد ثابتة</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="additional-service-card bg-white p-4 rounded shadow-sm h-100 text-center">
+            <i class="fas fa-walking text-secondary mb-3"></i>
+            <h5>العلاج الطبيعي</h5>
+            <p>نقل لجلسات العلاج الطبيعي مع مساعدة في الحركة</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="additional-service-card bg-white p-4 rounded shadow-sm h-100 text-center">
+            <i class="fas fa-baby text-pink mb-3"></i>
+            <h5>نقل حديثي الولادة</h5>
+            <p>نقل آمن للأطفال حديثي الولادة مع حضانة متنقلة</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="additional-service-card bg-white p-4 rounded shadow-sm h-100 text-center">
+            <i class="fas fa-user-friends text-purple mb-3"></i>
+            <h5>كبار السن</h5>
+            <p>خدمة مخصصة لكبار السن مع رعاية خاصة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الأسعار -->
+  <section class="pricing py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5">أسعارنا التنافسية</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="pricing-card bg-white border border-danger rounded p-4 h-100">
+            <div class="text-center">
+              <h4 class="text-danger fw-bold">نقل طارئ</h4>
+              <div class="price my-3">
+                <span class="price-amount">يبدأ من 500</span>
+                <span class="price-currency">ريال</span>
+              </div>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i>استجابة فورية</li>
+                <li><i class="fas fa-check text-success me-2"></i>فريق طبي كامل</li>
+                <li><i class="fas fa-check text-success me-2"></i>أجهزة إنعاش</li>
+                <li><i class="fas fa-check text-success me-2"></i>24/7</li>
+              </ul>
+              <a href="booking.html" class="btn btn-danger btn-block w-100">اطلب الآن</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="pricing-card bg-white border border-primary rounded p-4 h-100">
+            <div class="text-center">
+              <h4 class="text-primary fw-bold">نقل غير طارئ</h4>
+              <div class="price my-3">
+                <span class="price-amount">يبدأ من 200</span>
+                <span class="price-currency">ريال</span>
+              </div>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i>حجز مسبق</li>
+                <li><i class="fas fa-check text-success me-2"></i>مرافقة طبية</li>
+                <li><i class="fas fa-check text-success me-2"></i>راحة تامة</li>
+                <li><i class="fas fa-check text-success me-2"></i>مرونة المواعيد</li>
+              </ul>
+              <a href="booking.html" class="btn btn-primary btn-block w-100">احجز موعد</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="pricing-card bg-white border border-warning rounded p-4 h-100">
+            <div class="text-center">
+              <h4 class="text-warning fw-bold">نقل جوي</h4>
+              <div class="price my-3">
+                <span class="price-amount">حسب المسافة</span>
+                <span class="price-currency"></span>
+              </div>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i>طائرة مجهزة</li>
+                <li><i class="fas fa-check text-success me-2"></i>نقل دولي</li>
+                <li><i class="fas fa-check text-success me-2"></i>فريق متخصص</li>
+                <li><i class="fas fa-check text-success me-2"></i>خدمة متكاملة</li>
+              </ul>
+              <a href="contact.html" class="btn btn-warning btn-block w-100">استفسر</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <p class="text-muted">* الأسعار تختلف حسب المسافة ونوع الخدمة المطلوبة</p>
+        <p class="text-muted">* نقبل التأمين الطبي من معظم الشركات</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- دعوة للعمل -->
+  <section class="cta py-5 bg-danger text-white">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">هل تحتاج أي من هذه الخدمات؟</h2>
+      <p class="lead mb-4">فريقنا الطبي جاهز لخدمتك على مدار الساعة</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="tel:997" class="btn btn-light btn-lg">
+          <i class="fas fa-phone me-2"></i>اتصل الآن: 997
+        </a>
+        <a href="booking.html" class="btn btn-outline-light btn-lg">
+          <i class="fas fa-calendar-plus me-2"></i>احجز الخدمة
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- تذييل الصفحة -->
+  <footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <h5 class="fw-bold mb-3">
+            <i class="fas fa-ambulance me-2"></i>إسعافك
+          </h5>
+          <p>نحن نقدم خدمات النقل الطبي الأكثر أماناً وموثوقية في المملكة العربية السعودية.</p>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <h5 class="fw-bold mb-3">اتصل بنا</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-phone me-2"></i>طوارئ: 997</li>
+            <li><i class="fas fa-headset me-2"></i>خدمة العملاء: 920006232</li>
+            <li><i class="fas fa-envelope me-2"></i>info@esafak.com</li>
+          </ul>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <h5 class="fw-bold mb-3">ساعات العمل</h5>
+          <p>خدمة 24 ساعة، 7 أيام في الأسبوع<br>للطوارئ والحجوزات</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 إسعافك. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # الواجهة الأمامية
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - NODE_ENV=development
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    networks:
+      - postal-bank-network
+
+  # الواجهة الخلفية
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres_password
+      - DB_NAME=postal_bank
+      - JWT_SECRET=tunisian_postal_bank_secret_key_2024
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    networks:
+      - postal-bank-network
+
+  # قاعدة البيانات
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_DB=postal_bank
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - postal-bank-network
+
+  # Redis للتخزين المؤقت (اختياري)
+  redis:
+    image: redis:6-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - postal-bank-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  postal-bank-network:
+    driver: bridge

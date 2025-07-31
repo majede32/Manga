@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#d32f2f" />
+    <meta
+      name="description"
+      content="منصة البنك البريدي التونسي الإلكترونية - خدمات مصرفية متطورة للجميع"
+    />
+    <meta name="keywords" content="بنك, بريد, تونس, خدمات مصرفية, تحويلات, قروض" />
+    <meta name="author" content="البنك البريدي التونسي" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bank.poste.tn/" />
+    <meta property="og:title" content="البنك البريدي التونسي" />
+    <meta property="og:description" content="منصة إلكترونية متطورة للخدمات المصرفية" />
+    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://bank.poste.tn/" />
+    <meta property="twitter:title" content="البنك البريدي التونسي" />
+    <meta property="twitter:description" content="منصة إلكترونية متطورة للخدمات المصرفية" />
+    <meta property="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Arabic and Latin fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' wss: https:;">
+    
+    <title>البنك البريدي التونسي | Banque Postale Tunisienne</title>
+    
+    <style>
+      body {
+        font-family: 'Cairo', 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        direction: rtl;
+      }
+      
+      [dir="ltr"] body {
+        direction: ltr;
+      }
+      
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+        color: white;
+        font-size: 1.2rem;
+      }
+      
+      .loading::after {
+        content: "";
+        width: 40px;
+        height: 40px;
+        border: 4px solid #ffffff;
+        border-top: 4px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 15px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Cairo, sans-serif;">
+        <h2>يتطلب هذا التطبيق تشغيل JavaScript</h2>
+        <p>الرجاء تفعيل JavaScript في متصفحك للوصول إلى جميع ميزات المنصة</p>
+        <hr style="margin: 20px 0;">
+        <h2>This application requires JavaScript</h2>
+        <p>Please enable JavaScript in your browser to access all platform features</p>
+      </div>
+    </noscript>
+    
+    <div id="root">
+      <div class="loading">
+        جارٍ تحميل المنصة... Loading Platform...
+      </div>
+    </div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

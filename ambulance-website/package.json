@@ -1,0 +1,55 @@
+{
+  "name": "esafak-ambulance-website",
+  "version": "1.0.0",
+  "description": "موقع إلكتروني متكامل لشركة خدمات النقل الطبي والإسعاف",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000 -o",
+    "dev": "npx live-server --port=8000 --open=/index.html",
+    "build": "echo 'Building project...' && mkdir -p dist && cp -r *.html css js images dist/",
+    "test": "echo 'Running tests...' && npx htmlhint *.html && npx stylelint css/*.css",
+    "lint": "npx eslint js/*.js",
+    "format": "npx prettier --write *.html css/*.css js/*.js",
+    "validate": "npx html-validator --file=index.html"
+  },
+  "keywords": [
+    "ambulance",
+    "medical-transport",
+    "healthcare",
+    "emergency-services",
+    "arabic-website",
+    "rtl-website",
+    "bootstrap",
+    "html5",
+    "css3",
+    "javascript"
+  ],
+  "author": "Esafak Medical Transport Services",
+  "license": "MIT",
+  "homepage": "https://esafak.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esafak/ambulance-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/esafak/ambulance-website/issues"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "htmlhint": "^1.1.4",
+    "stylelint": "^15.10.2",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "html-validator": "^6.0.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}

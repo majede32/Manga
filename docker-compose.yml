@@ -1,0 +1,109 @@
+version: '3.8'
+
+services:
+  # قاعدة البيانات الرئيسية
+  postgres:
+    image: postgres:15-alpine
+    container_name: tpb_postgres
+    environment:
+      POSTGRES_DB: tunisian_postal_bank
+      POSTGRES_USER: tpb_user
+      POSTGRES_PASSWORD: tpb_secure_password_2024
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - tpb_network
+
+  # Redis للتخزين المؤقت
+  redis:
+    image: redis:7-alpine
+    container_name: tpb_redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - tpb_network
+
+  # الخادم الخلفي
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tpb_backend
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://tpb_user:tpb_secure_password_2024@postgres:5432/tunisian_postal_bank
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: tpb_jwt_secret_key_2024_very_secure
+      PORT: 3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - tpb_network
+
+  # الواجهة الأمامية
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tpb_frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:3001/api
+      REACT_APP_WS_URL: ws://localhost:3001/ws
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - tpb_network
+
+  # Nginx كوسيط عكسي
+  nginx:
+    image: nginx:alpine
+    container_name: tpb_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - tpb_network
+
+  # قاعدة بيانات للاختبار
+  postgres_test:
+    image: postgres:15-alpine
+    container_name: tpb_postgres_test
+    environment:
+      POSTGRES_DB: tunisian_postal_bank_test
+      POSTGRES_USER: tpb_test_user
+      POSTGRES_PASSWORD: tpb_test_password
+    ports:
+      - "5433:5432"
+    networks:
+      - tpb_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  tpb_network:
+    driver: bridge

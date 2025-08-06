@@ -1,0 +1,13 @@
+{
+  "welcome": "Bienvenue sur la plateforme du Dinar Numérique Maghrébin!",
+  "login": "Connexion",
+  "register": "Créer un compte",
+  "dashboard": "Tableau de bord",
+  "balance": "Solde",
+  "transactions": "Transactions",
+  "send": "Envoyer",
+  "receive": "Recevoir",
+  "settings": "Paramètres",
+  "support": "Support",
+  "logout": "Déconnexion"
+}

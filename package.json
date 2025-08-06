@@ -1,0 +1,82 @@
+{
+  "name": "madu-platform",
+  "version": "1.0.0",
+  "description": "منصة الدينار المغاربي الرقمي - Maghreb Arab Digital Unity Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run blockchain:dev\" \"npm run api:dev\" \"npm run frontend:dev\"",
+    "start": "npm run api:start",
+    "build": "npm run frontend:build && npm run contracts:compile",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
+    "blockchain:setup": "cd blockchain && npm run setup",
+    "blockchain:dev": "cd blockchain && npm run dev",
+    "blockchain:deploy": "cd blockchain && npm run deploy",
+    "contracts:compile": "cd smart-contracts && npm run compile",
+    "contracts:deploy": "cd smart-contracts && npm run deploy",
+    "api:dev": "cd api && npm run dev",
+    "api:start": "cd api && npm start",
+    "api:test": "cd api && npm test",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "mobile:dev": "cd mobile && npm run dev",
+    "mobile:build": "cd mobile && npm run build",
+    "wallet:dev": "cd wallet && npm run dev",
+    "security:test": "cd security && npm run test",
+    "docs:build": "cd docs && npm run build",
+    "deploy:tunisia": "npm run deploy -- --network tunisia",
+    "deploy:libya": "npm run deploy -- --network libya",
+    "deploy:algeria": "npm run deploy -- --network algeria",
+    "setup:all": "npm run blockchain:setup && npm run contracts:compile"
+  },
+  "keywords": [
+    "blockchain",
+    "cryptocurrency",
+    "maghreb",
+    "tunisia",
+    "libya",
+    "algeria",
+    "digital-currency",
+    "fintech",
+    "cbdc"
+  ],
+  "author": "MADU Platform Development Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "lodash": "^4.17.21"
+  },
+  "workspaces": [
+    "blockchain",
+    "smart-contracts",
+    "wallet",
+    "api",
+    "frontend",
+    "mobile",
+    "security"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madu-platform/maghreb-digital-currency.git"
+  },
+  "bugs": {
+    "url": "https://github.com/madu-platform/maghreb-digital-currency/issues"
+  },
+  "homepage": "https://madu-platform.org"
+}

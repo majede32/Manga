@@ -1,0 +1,37 @@
+{
+  "name": "@madu/smart-contracts",
+  "version": "1.0.0",
+  "description": "MADU Smart Contracts - العقود الذكية للدينار المغاربي الرقمي",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "compile": "solc --bin --abi contracts/*.sol -o build/",
+    "deploy": "truffle migrate",
+    "test": "truffle test",
+    "verify": "truffle run verify",
+    "clean": "rm -rf build dist"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
+    "@openzeppelin/contracts-upgradeable": "^5.0.1",
+    "web3": "^4.3.0",
+    "ethers": "^6.8.1",
+    "truffle": "^5.11.5",
+    "@truffle/hdwallet-provider": "^2.1.15"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.2",
+    "solc": "^0.8.21",
+    "@truffle/artifactor": "^4.0.197",
+    "@truffle/contract": "^4.6.31"
+  },
+  "keywords": [
+    "smart-contracts",
+    "solidity",
+    "defi",
+    "cbdc",
+    "madu",
+    "blockchain"
+  ]
+}

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصف الثالث - مستقبلنا التعليمي</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .grade3-header {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .grade3-mascot {
+            font-size: 6rem;
+            animation: bounce 2s infinite;
+            margin: 20px 0;
+        }
+        
+        .scratch-studio {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .blocks-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .block-category {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .block-category:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+        
+        .motion-blocks { border-left: 5px solid #4C97FF; }
+        .looks-blocks { border-left: 5px solid #9966FF; }
+        .sound-blocks { border-left: 5px solid #CF63CF; }
+        .events-blocks { border-left: 5px solid #FFBF00; }
+        .control-blocks { border-left: 5px solid #FFAB19; }
+        .sensing-blocks { border-left: 5px solid #5CB1D6; }
+        .operators-blocks { border-left: 5px solid #59C059; }
+        .variables-blocks { border-left: 5px solid #FF8C1A; }
+        
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .project-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .project-info {
+            text-align: center;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .easy { background: #00b894; color: white; }
+        .medium { background: #fdcb6e; color: #2d3436; }
+        .hard { background: #e17055; color: white; }
+        
+        .coding-workspace {
+            background: #2d3436;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            color: white;
+        }
+        
+        .sprite-stage {
+            background: white;
+            border-radius: 15px;
+            height: 300px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #ddd;
+        }
+        
+        .sprite {
+            position: absolute;
+            font-size: 3rem;
+            transition: all 1s ease;
+            cursor: pointer;
+        }
+        
+        .sprite.cat {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .code-blocks-area {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .blocks-toolbox {
+            background: #636e72;
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .script-area {
+            background: #74b9ff;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 400px;
+        }
+        
+        .code-block {
+            background: #4C97FF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .code-block:hover {
+            background: #3d7dcc;
+            transform: scale(1.02);
+        }
+        
+        .code-block.motion { background: #4C97FF; }
+        .code-block.looks { background: #9966FF; }
+        .code-block.sound { background: #CF63CF; }
+        .code-block.control { background: #FFAB19; }
+        
+        .achievement-banner {
+            background: linear-gradient(135deg, #00cec9, #55a3ff);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .achievement-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+        
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-card.unlocked {
+            animation: glow 2s infinite;
+        }
+        
+        .challenge-section {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px 0;
+            color: white;
+        }
+        
+        .challenge-timer {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+        }
+        
+        .challenge-progress {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .challenge-bar {
+            background: #00b894;
+            height: 100%;
+            border-radius: 10px;
+            transition: width 2s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="grade3-header">
+        <div class="container">
+            <div class="grade3-mascot">🌳</div>
+            <h1>الصف الثالث - طور مهاراتك أكثر!</h1>
+            <p>تعلم البرمجة مع Scratch وطور إبداعك</p>
+            <a href="index.html" class="btn btn-secondary">العودة للرئيسية</a>
+        </div>
+    </header>
+
+    <!-- Scratch Studio -->
+    <section class="scratch-studio">
+        <div class="container">
+            <h2>🎨 استوديو Scratch للبرمجة</h2>
+            <p>أنشئ ألعاباً وقصصاً تفاعلية بنفسك!</p>
+            
+            <div class="blocks-palette">
+                <div class="block-category motion-blocks" onclick="selectBlocks('motion')">
+                    <i class="fas fa-arrows-alt"></i>
+                    <h4>الحركة</h4>
+                    <p>تحريك الشخصيات</p>
+                </div>
+                <div class="block-category looks-blocks" onclick="selectBlocks('looks')">
+                    <i class="fas fa-eye"></i>
+                    <h4>المظهر</h4>
+                    <p>تغيير الشكل والحجم</p>
+                </div>
+                <div class="block-category sound-blocks" onclick="selectBlocks('sound')">
+                    <i class="fas fa-volume-up"></i>
+                    <h4>الصوت</h4>
+                    <p>إضافة أصوات وموسيقى</p>
+                </div>
+                <div class="block-category events-blocks" onclick="selectBlocks('events')">
+                    <i class="fas fa-flag"></i>
+                    <h4>الأحداث</h4>
+                    <p>بدء وإيقاف البرامج</p>
+                </div>
+                <div class="block-category control-blocks" onclick="selectBlocks('control')">
+                    <i class="fas fa-cogs"></i>
+                    <h4>التحكم</h4>
+                    <p>حلقات وشروط</p>
+                </div>
+                <div class="block-category sensing-blocks" onclick="selectBlocks('sensing')">
+                    <i class="fas fa-wifi"></i>
+                    <h4>الاستشعار</h4>
+                    <p>التفاعل مع البيئة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coding Workspace -->
+    <section class="coding-workspace">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 30px;">💻 منطقة البرمجة</h2>
+            
+            <div class="sprite-stage" id="stage">
+                <div class="sprite cat" id="catSprite">🐱</div>
+            </div>
+            
+            <div class="code-blocks-area">
+                <div class="blocks-toolbox">
+                    <h4>صندوق الأدوات</h4>
+                    <div class="code-block motion" draggable="true" data-type="motion" data-action="move">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>تحرك 10 خطوات</span>
+                    </div>
+                    <div class="code-block motion" draggable="true" data-type="motion" data-action="turn">
+                        <i class="fas fa-redo"></i>
+                        <span>استدر 15 درجة</span>
+                    </div>
+                    <div class="code-block looks" draggable="true" data-type="looks" data-action="say">
+                        <i class="fas fa-comment"></i>
+                        <span>قل "مرحبا!"</span>
+                    </div>
+                    <div class="code-block sound" draggable="true" data-type="sound" data-action="play">
+                        <i class="fas fa-play"></i>
+                        <span>شغل صوت</span>
+                    </div>
+                    <div class="code-block control" draggable="true" data-type="control" data-action="repeat">
+                        <i class="fas fa-sync"></i>
+                        <span>كرر 5 مرات</span>
+                    </div>
+                    <div class="code-block control" draggable="true" data-type="control" data-action="wait">
+                        <i class="fas fa-pause"></i>
+                        <span>انتظر ثانية واحدة</span>
+                    </div>
+                </div>
+                
+                <div class="script-area" id="scriptArea" ondrop="dropCodeBlock(event)" ondragover="allowDrop(event)">
+                    <h4>منطقة الكود</h4>
+                    <p>اسحب الكتل هنا لإنشاء برنامجك</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-success" onclick="runScript()">
+                    <i class="fas fa-play"></i> تشغيل البرنامج
+                </button>
+                <button class="btn btn-warning" onclick="clearScript()">
+                    <i class="fas fa-trash"></i> مسح الكود
+                </button>
+                <button class="btn btn-info" onclick="saveProject()">
+                    <i class="fas fa-save"></i> حفظ المشروع
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Gallery -->
+    <section class="container">
+        <h2 style="text-align: center; margin: 50px 0 30px;">🏆 معرض المشاريع</h2>
+        <div class="project-gallery">
+            <div class="project-card">
+                <div class="project-preview" onclick="openProject('chase')">
+                    🏃‍♂️💨
+                </div>
+                <div class="project-info">
+                    <h3>لعبة المطاردة</h3>
+                    <div class="difficulty-badge easy">سهل</div>
+                    <p>ساعد القط في الهروب من الكلب!</p>
+                    <button class="btn btn-primary" onclick="startProject('chase')">ابدأ المشروع</button>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-preview" onclick="openProject('story')">
+                    📚✨
+                </div>
+                <div class="project-info">
+                    <h3>قصة تفاعلية</h3>
+                    <div class="difficulty-badge medium">متوسط</div>
+                    <p>أنشئ قصتك الخاصة مع شخصيات متحركة!</p>
+                    <button class="btn btn-primary" onclick="startProject('story')">ابدأ المشروع</button>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-preview" onclick="openProject('music')">
+                    🎵🎹
+                </div>
+                <div class="project-info">
+                    <h3>آلة موسيقية</h3>
+                    <div class="difficulty-badge hard">صعب</div>
+                    <p>اصنع آلة موسيقية رقمية!</p>
+                    <button class="btn btn-primary" onclick="startProject('music')">ابدأ المشروع</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Banner -->
+    <section class="achievement-banner">
+        <div class="container">
+            <h2>🏅 إنجازاتك في البرمجة</h2>
+            <div class="achievement-grid">
+                <div class="achievement-card unlocked">
+                    <div class="achievement-icon">🌟</div>
+                    <h4>المبرمج الصغير</h4>
+                    <p>أول برنامج لك!</p>
+                </div>
+                <div class="achievement-card unlocked">
+                    <div class="achievement-icon">🎯</div>
+                    <h4>خبير الحركة</h4>
+                    <p>استخدم 5 كتل حركة</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🎨</div>
+                    <h4>فنان رقمي</h4>
+                    <p>أنشئ 3 مشاريع فنية</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🎵</div>
+                    <h4>موسيقار صغير</h4>
+                    <p>اصنع آلة موسيقية</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🚀</div>
+                    <h4>مبدع المستقبل</h4>
+                    <p>أكمل 10 مشاريع</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">👑</div>
+                    <h4>ملك البرمجة</h4>
+                    <p>اخترع لعبتك الخاصة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Challenge -->
+    <section class="challenge-section">
+        <div class="container">
+            <h2 style="text-align: center;">🎯 تحدي اليوم</h2>
+            <div style="text-align: center;">
+                <h3>أنشئ روبوتاً يرسم مربعاً!</h3>
+                <p>استخدم كتل الحركة لجعل الروبوت يرسم مربعاً كاملاً</p>
+            </div>
+            
+            <div class="challenge-timer" id="challengeTimer">
+                ⏰ الوقت المتبقي: 15:00
+            </div>
+            
+            <div class="challenge-progress">
+                <div class="challenge-bar" id="challengeProgress" style="width: 30%;"></div>
+            </div>
+            
+            <div style="text-align: center;">
+                <p>التقدم: 30% مكتمل</p>
+                <button class="btn btn-success" onclick="acceptChallenge()">قبول التحدي</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentScript = [];
+        let spritePosition = { x: 50, y: 50 };
+        let spriteRotation = 0;
+
+        // Drag and Drop functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeBlocks = document.querySelectorAll('.code-block[draggable="true"]');
+            codeBlocks.forEach(block => {
+                block.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.setData('text/plain', JSON.stringify({
+                        type: this.dataset.type,
+                        action: this.dataset.action,
+                        text: this.textContent.trim()
+                    }));
+                });
+            });
+        });
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.target.closest('.script-area').style.background = '#5a9cff';
+        }
+
+        function dropCodeBlock(ev) {
+            ev.preventDefault();
+            ev.target.closest('.script-area').style.background = '#74b9ff';
+            
+            const blockData = JSON.parse(ev.dataTransfer.getData('text/plain'));
+            currentScript.push(blockData);
+            
+            const scriptArea = document.getElementById('scriptArea');
+            const blockElement = document.createElement('div');
+            blockElement.className = `code-block ${blockData.type}`;
+            blockElement.innerHTML = `
+                <i class="fas fa-grip-vertical"></i>
+                <span>${blockData.text}</span>
+                <button onclick="removeBlock(this)" style="margin-right: 10px; background: rgba(255,255,255,0.3); border: none; border-radius: 5px; color: white; padding: 5px;">×</button>
+            `;
+            
+            scriptArea.appendChild(blockElement);
+            
+            showMessage(`تمت إضافة "${blockData.text}" للبرنامج!`, 'info');
+        }
+
+        function removeBlock(button) {
+            const block = button.closest('.code-block');
+            const index = Array.from(block.parentNode.children).indexOf(block) - 1; // -1 for the header
+            currentScript.splice(index, 1);
+            block.remove();
+            showMessage('تم حذف الكتلة من البرنامج', 'warning');
+        }
+
+        function runScript() {
+            if (currentScript.length === 0) {
+                showMessage('أضف بعض الكتل أولاً!', 'warning');
+                return;
+            }
+            
+            showMessage('بدء تشغيل البرنامج! 🚀', 'success');
+            executeScript();
+        }
+
+        async function executeScript() {
+            const sprite = document.getElementById('catSprite');
+            
+            for (let i = 0; i < currentScript.length; i++) {
+                const block = currentScript[i];
+                
+                switch (block.action) {
+                    case 'move':
+                        await moveSprite(20);
+                        break;
+                    case 'turn':
+                        await turnSprite(90);
+                        break;
+                    case 'say':
+                        await sayMessage("مرحبا!");
+                        break;
+                    case 'play':
+                        showMessage('🎵 تشغيل الصوت', 'info');
+                        break;
+                    case 'wait':
+                        await wait(1000);
+                        break;
+                    case 'repeat':
+                        // Simple repeat logic - would need more complex implementation
+                        showMessage('🔄 تكرار الأوامر', 'info');
+                        break;
+                }
+                
+                await wait(500); // Small delay between commands
+            }
+            
+            showMessage('انتهى تشغيل البرنامج! 🎉', 'success');
+        }
+
+        function moveSprite(distance) {
+            return new Promise(resolve => {
+                const sprite = document.getElementById('catSprite');
+                const radian = (spriteRotation * Math.PI) / 180;
+                spritePosition.x += Math.cos(radian) * distance;
+                spritePosition.y += Math.sin(radian) * distance;
+                
+                // Keep sprite within bounds
+                spritePosition.x = Math.max(20, Math.min(spritePosition.x, 80));
+                spritePosition.y = Math.max(20, Math.min(spritePosition.y, 80));
+                
+                sprite.style.left = spritePosition.x + '%';
+                sprite.style.top = spritePosition.y + '%';
+                sprite.style.transform = `translate(-50%, -50%) rotate(${spriteRotation}deg)`;
+                
+                setTimeout(resolve, 1000);
+            });
+        }
+
+        function turnSprite(degrees) {
+            return new Promise(resolve => {
+                const sprite = document.getElementById('catSprite');
+                spriteRotation += degrees;
+                sprite.style.transform = `translate(-50%, -50%) rotate(${spriteRotation}deg)`;
+                setTimeout(resolve, 500);
+            });
+        }
+
+        function sayMessage(message) {
+            return new Promise(resolve => {
+                const sprite = document.getElementById('catSprite');
+                const bubble = document.createElement('div');
+                bubble.textContent = message;
+                bubble.style.cssText = `
+                    position: absolute;
+                    background: white;
+                    padding: 10px 15px;
+                    border-radius: 20px;
+                    top: -50px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                    font-size: 14px;
+                    color: #333;
+                    z-index: 100;
+                `;
+                
+                sprite.appendChild(bubble);
+                
+                setTimeout(() => {
+                    if (bubble.parentNode) {
+                        bubble.remove();
+                    }
+                    resolve();
+                }, 2000);
+            });
+        }
+
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function clearScript() {
+            currentScript = [];
+            const scriptArea = document.getElementById('scriptArea');
+            
+            // Remove all blocks except the header
+            const blocks = scriptArea.querySelectorAll('.code-block');
+            blocks.forEach(block => block.remove());
+            
+            showMessage('تم مسح الكود', 'info');
+        }
+
+        function saveProject() {
+            if (currentScript.length === 0) {
+                showMessage('لا يوجد كود للحفظ!', 'warning');
+                return;
+            }
+            
+            const projectData = {
+                script: currentScript,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('scratchProject', JSON.stringify(projectData));
+            showMessage('تم حفظ المشروع بنجاح! 💾', 'success');
+        }
+
+        function selectBlocks(category) {
+            showMessage(`تم اختيار كتل ${getCategoryName(category)}! 🎨`, 'info');
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                motion: 'الحركة',
+                looks: 'المظهر',
+                sound: 'الصوت',
+                events: 'الأحداث',
+                control: 'التحكم',
+                sensing: 'الاستشعار'
+            };
+            return names[category] || category;
+        }
+
+        function startProject(projectType) {
+            const projects = {
+                chase: 'مشروع لعبة المطاردة',
+                story: 'مشروع القصة التفاعلية',
+                music: 'مشروع الآلة الموسيقية'
+            };
+            
+            showMessage(`بدء ${projects[projectType]}! 🚀`, 'success');
+        }
+
+        function openProject(projectType) {
+            showMessage('معاينة المشروع! 👀', 'info');
+        }
+
+        function acceptChallenge() {
+            showMessage('تم قبول التحدي! ابدأ البرمجة الآن! 💪', 'success');
+            startChallengeTimer();
+        }
+
+        function startChallengeTimer() {
+            let timeLeft = 15 * 60; // 15 minutes in seconds
+            const timer = document.getElementById('challengeTimer');
+            
+            const countdown = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timer.textContent = `⏰ الوقت المتبقي: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    showMessage('انتهى وقت التحدي! 🕐', 'warning');
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? '#00b894' : type === 'warning' ? '#fdcb6e' : '#74b9ff'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 3000;
+                animation: slideInRight 0.5s ease, slideOutRight 0.5s ease 2.5s both;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // CSS Animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            @keyframes glow {
+                0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+                50% { box-shadow: 0 0 20px rgba(255,255,255,0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Load saved project on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedProject = localStorage.getItem('scratchProject');
+            if (savedProject) {
+                showMessage('تم العثور على مشروع محفوظ! 📁', 'info');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مستقبلنا التعليمي - تعلم ممتع للأطفال</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>مستقبلنا التعليمي</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="#grades" class="nav-link"><i class="fas fa-school"></i> الصفوف</a></li>
+                <li><a href="#activities" class="nav-link"><i class="fas fa-gamepad"></i> الأنشطة</a></li>
+                <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> من نحن</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">🌟 مرحباً بكم في مستقبلنا التعليمي! 🌟</h1>
+                <p class="hero-subtitle">تعلم ممتع وتفاعلي للأطفال من الصف الأول إلى السادس</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="startLearning()">
+                        <i class="fas fa-play"></i> ابدأ التعلم الآن
+                    </button>
+                    <button class="btn btn-secondary" onclick="showDemo()">
+                        <i class="fas fa-eye"></i> شاهد العرض التوضيحي
+                    </button>
+                </div>
+            </div>
+            <div class="hero-character">
+                <div class="character-container">
+                    <div class="character" id="mascot">
+                        <div class="character-face">😊</div>
+                        <div class="character-body"></div>
+                    </div>
+                    <div class="speech-bubble" id="speech">
+                        <p>مرحباً! أنا صديقكم المساعد في رحلة التعلم! 🎓</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="floating-elements">
+            <div class="floating-shape circle"></div>
+            <div class="floating-shape triangle"></div>
+            <div class="floating-shape square"></div>
+            <div class="floating-shape star"></div>
+        </div>
+    </section>
+
+    <!-- Grades Section -->
+    <section id="grades" class="grades">
+        <div class="container">
+            <h2 class="section-title">اختر صفك الدراسي 📚</h2>
+            <div class="grades-grid">
+                <div class="grade-card" data-grade="1">
+                    <div class="grade-icon">🌱</div>
+                    <h3>الصف الأول</h3>
+                    <p>ابدأ رحلتك التعليمية!</p>
+                    <ul class="subjects-list">
+                        <li><i class="fas fa-book"></i> اللغة العربية</li>
+                        <li><i class="fas fa-calculator"></i> الرياضيات</li>
+                        <li><i class="fas fa-flask"></i> العلوم</li>
+                        <li><i class="fas fa-palette"></i> الفنون</li>
+                        <li><i class="fas fa-code"></i> البرمجة البسيطة</li>
+                    </ul>
+                    <button class="btn btn-grade" onclick="openGrade(1)">ادخل الصف</button>
+                </div>
+
+                <div class="grade-card" data-grade="2">
+                    <div class="grade-icon">🌿</div>
+                    <h3>الصف الثاني</h3>
+                    <p>استمر في النمو والتعلم!</p>
+                    <ul class="subjects-list">
+                        <li><i class="fas fa-book"></i> اللغة العربية</li>
+                        <li><i class="fas fa-calculator"></i> الرياضيات</li>
+                        <li><i class="fas fa-flask"></i> العلوم</li>
+                        <li><i class="fas fa-globe"></i> الجغرافيا</li>
+                        <li><i class="fas fa-language"></i> اللغة الإنجليزية</li>
+                    </ul>
+                    <button class="btn btn-grade" onclick="openGrade(2)">ادخل الصف</button>
+                </div>
+
+                <div class="grade-card" data-grade="3">
+                    <div class="grade-icon">🌳</div>
+                    <h3>الصف الثالث</h3>
+                    <p>طور مهاراتك أكثر!</p>
+                    <ul class="subjects-list">
+                        <li><i class="fas fa-book"></i> اللغة العربية</li>
+                        <li><i class="fas fa-calculator"></i> الرياضيات</li>
+                        <li><i class="fas fa-flask"></i> العلوم</li>
+                        <li><i class="fas fa-history"></i> التاريخ</li>
+                        <li><i class="fas fa-laptop-code"></i> Scratch البرمجة</li>
+                    </ul>
+                    <button class="btn btn-grade" onclick="openGrade(3)">ادخل الصف</button>
+                </div>
+
+                <div class="grade-card" data-grade="4">
+                    <div class="grade-icon">🏆</div>
+                    <h3>الصف الرابع</h3>
+                    <p>تعلم مهارات متقدمة!</p>
+                    <ul class="subjects-list">
+                        <li><i class="fas fa-book"></i> اللغة العربية</li>
+                        <li><i class="fas fa-calculator"></i> الرياضيات المتقدمة</li>
+                        <li><i class="fas fa-atom"></i> العلوم المتقدمة</li>
+                        <li><i class="fas fa-chart-bar"></i> تحليل البيانات</li>
+                        <li><i class="fas fa-seedling"></i> البيئة والاستدامة</li>
+                    </ul>
+                    <button class="btn btn-grade" onclick="openGrade(4)">ادخل الصف</button>
+                </div>
+
+                <div class="grade-card" data-grade="5">
+                    <div class="grade-icon">🎯</div>
+                    <h3>الصف الخامس</h3>
+                    <p>استكشف آفاق جديدة!</p>
+                    <ul class="subjects-list">
+                        <li><i class="fas fa-book"></i> اللغة العربية</li>
+                        <li><i class="fas fa-calculator"></i> الرياضيات</li>
+                        <li><i class="fas fa-microscope"></i> العلوم</li>
+                        <li><i class="fas fa-lightbulb"></i> ريادة الأعمال</li>
+                        <li><i class="fas fa-robot"></i> الذكاء الاصطناعي</li>
+                    </ul>
+                    <button class="btn btn-grade" onclick="openGrade(5)">ادخل الصف</button>
+                </div>
+
+                <div class="grade-card" data-grade="6">
+                    <div class="grade-icon">🚀</div>
+                    <h3>الصف السادس</h3>
+                    <p>استعد للمستقبل!</p>
+                    <ul class="subjects-list">
+                        <li><i class="fas fa-book"></i> اللغة العربية</li>
+                        <li><i class="fas fa-calculator"></i> الرياضيات المتقدمة</li>
+                        <li><i class="fas fa-dna"></i> العلوم المتقدمة</li>
+                        <li><i class="fas fa-project-diagram"></i> إدارة المشاريع</li>
+                        <li><i class="fas fa-globe-americas"></i> التفكير العالمي</li>
+                    </ul>
+                    <button class="btn btn-grade" onclick="openGrade(6)">ادخل الصف</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="activities">
+        <div class="container">
+            <h2 class="section-title">أنشطة ممتعة وتفاعلية 🎮</h2>
+            <div class="activities-grid">
+                <div class="activity-card" onclick="openActivity('games')">
+                    <div class="activity-icon">🎯</div>
+                    <h3>ألعاب تعليمية</h3>
+                    <p>العب وتعلم في نفس الوقت!</p>
+                </div>
+                
+                <div class="activity-card" onclick="openActivity('puzzles')">
+                    <div class="activity-icon">🧩</div>
+                    <h3>الألغاز الذكية</h3>
+                    <p>حل الألغاز وطور تفكيرك!</p>
+                </div>
+                
+                <div class="activity-card" onclick="openActivity('stories')">
+                    <div class="activity-icon">📚</div>
+                    <h3>القصص التفاعلية</h3>
+                    <p>اقرأ واستمتع بالمغامرات!</p>
+                </div>
+                
+                <div class="activity-card" onclick="openActivity('coding')">
+                    <div class="activity-icon">💻</div>
+                    <h3>البرمجة للأطفال</h3>
+                    <p>تعلم البرمجة بطريقة ممتعة!</p>
+                </div>
+                
+                <div class="activity-card" onclick="openActivity('art')">
+                    <div class="activity-icon">🎨</div>
+                    <h3>الفنون الرقمية</h3>
+                    <p>أبدع وارسم بالأدوات الرقمية!</p>
+                </div>
+                
+                <div class="activity-card" onclick="openActivity('music')">
+                    <div class="activity-icon">🎵</div>
+                    <h3>الموسيقى والغناء</h3>
+                    <p>تعلم النوتات والألحان!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="progress-section">
+        <div class="container">
+            <h2 class="section-title">تتبع تقدمك 📈</h2>
+            <div class="progress-dashboard">
+                <div class="progress-card">
+                    <div class="progress-icon">🏆</div>
+                    <h3>الشارات المكتسبة</h3>
+                    <div class="badges-container">
+                        <div class="badge earned">🌟</div>
+                        <div class="badge earned">🎯</div>
+                        <div class="badge earned">📚</div>
+                        <div class="badge locked">🏅</div>
+                        <div class="badge locked">🎨</div>
+                    </div>
+                </div>
+                
+                <div class="progress-card">
+                    <div class="progress-icon">📊</div>
+                    <h3>مستوى التقدم</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <p>65% مكتمل</p>
+                </div>
+                
+                <div class="progress-card">
+                    <div class="progress-icon">⭐</div>
+                    <h3>النقاط المجمعة</h3>
+                    <div class="points-display">
+                        <span class="points-count">1,250</span>
+                        <span class="points-label">نقطة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">من نحن 👨‍🏫👩‍🏫</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>رؤيتنا</h3>
+                    <p>نسعى لتوفير تعليم متطور ومناسب للأطفال، يجمع بين المرح والتعلم الفعال. نؤمن أن كل طفل يستحق تجربة تعليمية ممتعة تنمي قدراته ومواهبه.</p>
+                    
+                    <h3>مميزاتنا</h3>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> محتوى تعليمي متطور ومناسب للأطفال</li>
+                        <li><i class="fas fa-check"></i> أنشطة تفاعلية وألعاب تعليمية</li>
+                        <li><i class="fas fa-check"></i> تعلم البرمجة والمهارات الرقمية</li>
+                        <li><i class="fas fa-check"></i> تصميم آمن ومناسب للأطفال</li>
+                        <li><i class="fas fa-check"></i> متابعة التقدم والإنجازات</li>
+                        <li><i class="fas fa-check"></i> دعم متعدد الأجهزة</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div class="team-illustration">
+                        <div class="teacher-character">👨‍🏫</div>
+                        <div class="student-characters">
+                            <div class="student">👧</div>
+                            <div class="student">👦</div>
+                            <div class="student">👧</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>مستقبلنا التعليمي</h3>
+                    <p>تعليم ممتع وتفاعلي للأطفال</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط مفيدة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#grades">الصفوف</a></li>
+                        <li><a href="#activities">الأنشطة</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> info@ourlearningfuture.com</p>
+                        <p><i class="fas fa-phone"></i> +966 12 345 6789</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 مستقبلنا التعليمي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals and Interactive Elements -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">عنوان النافذة</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-content">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

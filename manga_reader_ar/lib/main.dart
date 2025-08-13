@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'screens/reader_screen.dart';
+import 'services/storage_service.dart';
+import 'services/translation_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+  await StorageService.init();
+  TranslationService.init();
   runApp(const MangaReaderApp());
 }
 

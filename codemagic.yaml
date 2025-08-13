@@ -1,0 +1,99 @@
+workflows:
+  android_debug:
+    name: Android Debug (APK)
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+      groups:
+        - secrets  # Define OPENAI_API_KEY in this env group on Codemagic
+    working_directory: manga_reader_ar
+    scripts:
+      - name: Flutter version
+        script: flutter --version
+      - name: Fetch dependencies
+        script: flutter pub get
+      - name: Create .env from CI secret
+        script: |
+          echo "OPENAI_API_KEY=${OPENAI_API_KEY}" > .env
+      - name: Build debug APK
+        script: flutter build apk --debug
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+    cache:
+      cache_paths:
+        - $HOME/.pub-cache
+        - $FCI_BUILD_DIR/manga_reader_ar/build
+
+  android_release:
+    name: Android Release (AAB + APK)
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+      groups:
+        - secrets  # Define OPENAI_API_KEY in this env group on Codemagic
+    working_directory: manga_reader_ar
+    scripts:
+      - name: Fetch dependencies
+        script: flutter pub get
+      - name: Create .env from CI secret
+        script: |
+          echo "OPENAI_API_KEY=${OPENAI_API_KEY}" > .env
+      - name: Build release APK
+        script: flutter build apk --release --no-tree-shake-icons
+      - name: Build app bundle
+        script: flutter build appbundle --release --no-tree-shake-icons
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/*.aab
+    cache:
+      cache_paths:
+        - $HOME/.pub-cache
+        - $FCI_BUILD_DIR/manga_reader_ar/build
+
+  web_release:
+    name: Web Release
+    max_build_duration: 30
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+      groups:
+        - secrets  # Define OPENAI_API_KEY in this env group on Codemagic
+    working_directory: manga_reader_ar
+    scripts:
+      - name: Fetch dependencies
+        script: flutter pub get
+      - name: Create .env from CI secret
+        script: |
+          echo "OPENAI_API_KEY=${OPENAI_API_KEY}" > .env
+      - name: Build web
+        script: flutter build web --release
+    artifacts:
+      - build/web/**
+
+  linux_release:
+    name: Linux Desktop Release
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+      groups:
+        - secrets  # Define OPENAI_API_KEY in this env group on Codemagic
+    working_directory: manga_reader_ar
+    scripts:
+      - name: Install Linux deps
+        script: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+      - name: Fetch dependencies
+        script: flutter pub get
+      - name: Create .env from CI secret
+        script: |
+          echo "OPENAI_API_KEY=${OPENAI_API_KEY}" > .env
+      - name: Enable desktop and build linux
+        script: |
+          flutter config --enable-linux-desktop
+          flutter build linux --release
+    artifacts:
+      - build/linux/**/release/**

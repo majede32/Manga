@@ -24,3 +24,13 @@ A minimal full-stack setup:
 
 Set `NEXT_PUBLIC_BACKEND_URL` (frontend) to the backend address (defaults to `http://localhost:8000`).
 
+### Deploying to Vercel
+- Project root should be `frontend/`
+- In Vercel project settings:
+  - Framework: Next.js
+  - Build command: `npm run build`
+  - Output dir: `.next`
+  - Root directory: `frontend`
+  - Environment variable: `BACKEND_URL` pointing to your FastAPI host
+- The frontend calls `/api/analyze` which proxies to `BACKEND_URL/analyze` on Vercel and locally.
+

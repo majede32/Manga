@@ -50,15 +50,13 @@ export default function Home() {
   const [result, setResult] = useState<null | { is_valid: boolean; score: number; warnings: string[]; extracted_text_preview: string }>(null)
   const [loading, setLoading] = useState(false)
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
-
   async function onUpload() {
     if (!file) return
     setLoading(true)
     setResult(null)
     const formData = new FormData()
     formData.append('file', file)
-    const res = await fetch(`${backendUrl}/analyze`, { method: 'POST', body: formData })
+    const res = await fetch(`/api/analyze`, { method: 'POST', body: formData })
     const json = await res.json()
     setResult(json)
     setLoading(false)

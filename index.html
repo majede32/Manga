@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>منصة الفاتورة الإلكترونية - دليل البداية</title>
+    <meta name="description" content="أصول البداية لمنصة الفاتورة الإلكترونية: RFP، OpenAPI، JSON Schema، وPoC" />
+    <style>
+      :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#22c55e; }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: linear-gradient(160deg, var(--bg), #020617 60%);
+        color: var(--text);
+        display: grid; place-items: center;
+      }
+      .container { width: min(900px, 92vw); padding: 32px; }
+      .hero { text-align: center; margin-bottom: 28px; }
+      h1 { margin: 0 0 8px; font-size: 32px; }
+      p.lead { margin: 0; color: var(--muted); font-size: 16px; }
+      .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 24px; }
+      .card { background: rgba(17, 24, 39, 0.7); border: 1px solid #1f2937; border-radius: 12px; padding: 16px; backdrop-filter: blur(6px); }
+      .card h3 { margin: 0 0 8px; font-size: 18px; }
+      a { color: var(--accent); text-decoration: none; }
+      .footer { margin-top: 28px; text-align: center; color: var(--muted); font-size: 13px; }
+      .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
+      .pill { border: 1px solid #1f2937; padding: 8px 12px; border-radius: 999px; background:#0b1220; }
+      code { background:#0b1220; padding: 2px 6px; border-radius: 6px; border:1px solid #1f2937; }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <h1>منصة الفاتورة الإلكترونية – أصول البداية</h1>
+        <p class="lead">روابط سريعة إلى RFP، مواصفات OpenAPI، مخطط JSON، ومخطط PoC.</p>
+        <div class="links">
+          <a class="pill" href="/docs/RFP-eInvoicing-ar.md">RFP عربي</a>
+          <a class="pill" href="/specs/openapi.yaml">OpenAPI 3.1</a>
+          <a class="pill" href="/swagger.html">Swagger UI</a>
+          <a class="pill" href="/schemas/invoice.schema.json">Invoice JSON Schema</a>
+          <a class="pill" href="/docs/POC-blueprint.md">مخطط PoC (90 يوماً)</a>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h3>كيفية النشر على Vercel</h3>
+          <p>لا يحتاج هذا المشروع لأي بناء. وجود <code>index.html</code> في الجذر يمكّن العرض مباشرة.</p>
+          <ul>
+            <li>اربط المستودع مع Vercel وحدد الجذر الحالي.</li>
+            <li>اترك أوامر البناء والتصدير فارغة (مشروع ثابت).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>اختبار السكيمة محلياً</h3>
+          <p>مثال أمر باستخدام <code>ajv</code>:</p>
+          <p><code>jq . sample-invoice.json | ajv validate -s schemas/invoice.schema.json -d -</code></p>
+        </div>
+        <div class="card">
+          <h3>ملاحظات</h3>
+          <p>يمكنك استعراض مواصفات OpenAPI مباشرة عبر <a href="/swagger.html">Swagger UI</a>.</p>
+        </div>
+      </section>
+
+      <div class="footer">© 2025 — منصة الفاتورة الإلكترونية (عرض أولي)</div>
+    </main>
+  </body>
+  </html>
+
